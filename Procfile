@@ -1,0 +1,1 @@
+web java -Dserver.port=$PORT -Dspring.profiles.active=test $JAVA_OPTS -jar target/auth-service-1.0.0.jar
