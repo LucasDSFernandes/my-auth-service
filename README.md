@@ -15,6 +15,6 @@ Para poder startar aplicação, colocar nas configurações o seguinte:
 
  ```sh
 	$ Program arguments: --spring.config.location=src/main/resources/application.yml --spring.config.name=application.yml
-	$ VM Arguments: -Dspring.profiles.active=test (Para utilizar banco em memoria) ou -Dspring.profiles.active=dev (utilizar banco mysql) 
+	$ VM Arguments: -Dspring.profiles.active=test (Para utilizar banco em memoria) ou ou -Dspring.profiles.active=dev (Heroku)
  ````
 
