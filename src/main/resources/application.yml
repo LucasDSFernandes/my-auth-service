@@ -3,19 +3,22 @@ server:
 spring:  
   jpa:
     show-sql : true
-    generate-ddl : true
+    generate-ddl : false
     properties:
       hibernate:
         show_sql: true 
         use_sql_comments: true
         format_sql: true
         type_sql: true
-        ddl-auto: none 
+        ddl-auto: update
 # JWT
 security:
   jwt:
     expiresInHours: 1
     secret: $10$6GBcDoRjwQcHvZpdGtEXIuNO/e4CMgWochkaQwa4RzvvztlJl0Pcq
+eureka:
+  client:
+    enabled: true 
 ---
 #################################### AMBIENTE ######################################################
 spring:
@@ -23,25 +26,27 @@ spring:
     name: auth-service-dev
   profiles: dev
   datasource:
-    url: jdbc:mysql://localhost:3306/projectuser?useTimezone=true&serverTimezone=UTC
-    password: sysadm
-    username: root
-    platform: mysql
-    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:postgresql://ec2-34-195-115-225.compute-1.amazonaws.com:5432/d3v46croeli6c3?sslmode=require&user=aiomltflvwkzjh&password=67199a164ae12c6f9a7cff724ef7f65aa3c1212277462a7e5d2ab9df9efe432b
+    password: 67199a164ae12c6f9a7cff724ef7f65aa3c1212277462a7e5d2ab9df9efe432b
+    username: aiomltflvwkzjh
+    platform: postgres
+    driver-class-name: org.postgresql.Driver
     hikari:
         maximum-pool-size: 30
         connectionTimeout: 30000
         idleTimeout: 600000
         maxLifetime: 1800000
+  jpa:
+    database-platform: org.hibernate.dialect.PostgreSQLDialect  
 eureka:
   instance:
     port: ${PORT:9090}
-    hostname: localhost
+    hostname: ${DOMAIN_NAME}
   client:
     registerWithEureka: true
     fetchRegistry: false
     serviceUrl:
-      defaultZone: http://${eureka.instance.hostname}:${eureka.instance.port}/eureka/
+      defaultZone: ${EUREKA_URL}
   server:
     wait-time-in-ms-when-sync-empty: 3000
 --- 
