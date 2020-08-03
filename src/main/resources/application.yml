@@ -65,7 +65,7 @@ spring:
 eureka:
   instance:
     port: ${PORT:9090}
-    hostname: localhost
+    hostname: ${DOMAIN_NAME}
   client:
     registerWithEureka: true
     fetchRegistry: false
