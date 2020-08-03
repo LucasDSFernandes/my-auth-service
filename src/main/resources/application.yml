@@ -16,17 +16,6 @@ security:
   jwt:
     expiresInHours: 1
     secret: $10$6GBcDoRjwQcHvZpdGtEXIuNO/e4CMgWochkaQwa4RzvvztlJl0Pcq
-eureka:
-  instance:
-    port: ${PORT:9090}
-    hostname: localhost
-  client:
-    registerWithEureka: true
-    fetchRegistry: false
-    serviceUrl:
-      defaultZone: http://${eureka.instance.hostname}:${eureka.instance.port}/eureka/
-  server:
-    wait-time-in-ms-when-sync-empty: 3000
 ---
 #################################### AMBIENTE ######################################################
 spring:
@@ -44,6 +33,17 @@ spring:
         connectionTimeout: 30000
         idleTimeout: 600000
         maxLifetime: 1800000
+eureka:
+  instance:
+    port: ${PORT:9090}
+    hostname: localhost
+  client:
+    registerWithEureka: true
+    fetchRegistry: false
+    serviceUrl:
+      defaultZone: http://${eureka.instance.hostname}:${eureka.instance.port}/eureka/
+  server:
+    wait-time-in-ms-when-sync-empty: 3000
 --- 
 ################################### TESTE #####################################################
 spring:
@@ -56,9 +56,20 @@ spring:
     username: lucasdsf
     platform: h2
     password: 12345678
-    url: jdbc:h2:~/h2bd;AUTO_SERVER=TRUE
+    url: jdbc:h2:~/h2bd2;AUTO_SERVER=TRUE
   jpa:    database-platform: org.hibernate.dialect.H2Dialect
   h2:
     console:
       enabled: true
       path: /h2-console
+eureka:
+  instance:
+    port: ${PORT:9090}
+    hostname: localhost
+  client:
+    registerWithEureka: true
+    fetchRegistry: false
+    serviceUrl:
+      defaultZone: http://${eureka.instance.hostname}:${eureka.instance.port}/eureka/
+  server:
+    wait-time-in-ms-when-sync-empty: 3000
