@@ -1,6 +1,7 @@
 package com.lucasdsf.api.auth.service.impl;
 
-import java.time.LocalDateTime;
+import java.time.ZoneId;
+import java.time.ZonedDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -40,7 +41,7 @@ public class UserDetailsServiceImpl implements UserDetailsService{
 	}
 	
 	public UserDetailDto create(User user) {
-		user.setLastLogin(LocalDateTime.now());
+		user.setLastLogin(ZonedDateTime.now(ZoneId.of("America/Sao_Paulo")).toLocalDateTime());
 		userRepository.save(user);
 		return new UserDetailDto(user,getBuildLisVehicle(user),mapToGrantedAuthorities(user.getProfile().getDescriptionProfile()));
 	}
