@@ -26,18 +26,31 @@ spring:
     name: auth-service-dev
   profiles: dev
   datasource:
-    url: jdbc:postgresql://ec2-34-195-115-225.compute-1.amazonaws.com:5432/d3v46croeli6c3?sslmode=require&user=aiomltflvwkzjh&password=67199a164ae12c6f9a7cff724ef7f65aa3c1212277462a7e5d2ab9df9efe432b
+    url: jdbc:postgresql://ec2-34-195-115-225.compute-1.amazonaws.com:5432/d3v46croeli6c3?sslmode=require&user=aiomltflvwkzjh&password=67199a164ae12c6f9a7cff724ef7f65aa3c1212277462a7e5d2ab9df9efe432b&loadBalanceHosts=true
     password: 67199a164ae12c6f9a7cff724ef7f65aa3c1212277462a7e5d2ab9df9efe432b
     username: aiomltflvwkzjh
     platform: postgres
     driver-class-name: org.postgresql.Driver
     hikari:
-        maximum-pool-size: 30
+        maximum-pool-size: 8
         connectionTimeout: 30000
-        idleTimeout: 600000
-        maxLifetime: 1800000
+        idleTimeout: 10000
+        maxLifetime: 10000
+    tomcat:
+      max-idle: 10
+      max-active: 10
+      max-wait: 10000
+      default-auto-commit: true
   jpa:
+    database: POSTGRESQL
+    hibernate:
+      dialect: org.hibernate.dialect.PostgreSQLDialect
     database-platform: org.hibernate.dialect.PostgreSQLDialect  
+    properties:
+      jadira:
+        usertype:
+          autoRegisterUserTypes: true
+ 
 eureka:
   instance:
     port: ${PORT:9090}
